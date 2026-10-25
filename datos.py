@@ -39,5 +39,12 @@ normales = [
     "tu pago de la matricula fue recibido, gracias",
     "te llamo en 10 minutos, estoy manejando",
     "puedes verificar si el examen es el lunes o el martes?",
-    "mi mama cambio de numero, te lo paso por whatsapp",
+    "mi mama cambio de numero, te lo paso por interno", "hola",
+    "hola como estas",
+    "hola que tal tu dia",
+    "buenos dias, ya desayunaste?",
+    "hola, ya llegue a la casa",
+    "hola hijo, llamame cuando puedas",
+    "buenas noches, que descanses",
+    "hola, gracias por la ayuda de ayer",
 ]

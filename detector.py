@@ -93,26 +93,30 @@ def probabilidad_ia(mensaje):
     prob = modelo.predict_proba(vectorizador.transform([mensaje]))
     return round(prob[0][1] * 100)
     
-# ===== BLOQUE 4: PROGRAMA PRINCIPAL =====
+# ===== BLOQUE 4: FUNCIÓN PRINCIPAL =====
+def revisar_mensaje(mensaje):
+    mensaje = mensaje.lower()
 
-mensaje = input("Pega el mensaje a revisar: ").lower()
+    links = encontrar_links(mensaje)
+    mensaje_peligroso = False
+    for link in links:
+        if analizar_url(link):
+            mensaje_peligroso = True
 
-links = encontrar_links(mensaje)
-mensaje_peligroso = False
-for link in links:
-    print("Revisando:", link)
-    if analizar_url(link):
-        mensaje_peligroso = True
-        
-puntos = analizar_texto(mensaje)
-print("Palabras sospechosas encontradas:", puntos)
+    puntos = analizar_texto(mensaje)
+    prob = probabilidad_ia(mensaje)
 
-prob = probabilidad_ia(mensaje)
-print("Probabilidad de phishing (IA):", prob, "%")
+    if mensaje_peligroso or prob >= 70:
+        resultado = "PELIGROSO"
+    elif prob >= 40 or puntos >= 2:
+        resultado = "SOSPECHOSO, revisa con cuidado"
+    else:
+        resultado = "Parece seguro"
 
-if mensaje_peligroso or prob >=70:
-    print("RESULTADO: PELIGROSO")
-elif prob >=40 or puntos >=2:
-    print("RESULTADO: SOSPECHOSO, revisa con cuidado")
-else:
-    print("RESULTADO: Parece seguro")
+    return resultado
+
+
+# ===== BLOQUE 5: USO DESDE LA TERMINAL =====
+if __name__ == "__main__":
+    mensaje = input("Pega el mensaje a revisar: ")
+    print("RESULTADO:", revisar_mensaje(mensaje))
