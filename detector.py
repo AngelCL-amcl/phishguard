@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
-from datos import phishing, normales
+from datos import cargar_todo
 
 # ===== BLOQUE 1: LISTAS =====
 sufijos_dobles = ["com.mx", "co.uk", "com.br", "com.ec", "com.ar", "com.co"]
@@ -31,8 +31,7 @@ dominios_confiables = [
 ]
 
 # ===== BLOQUE IA: ENTRENAR EL MODELO =====
-textos = phishing + normales
-etiquetas = [1] * len(phishing) + [0] * len(normales)
+textos, etiquetas = cargar_todo()
 
 vectorizador = CountVectorizer()
 X = vectorizador.fit_transform(textos)

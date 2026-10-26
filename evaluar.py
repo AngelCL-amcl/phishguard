@@ -2,10 +2,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-from datos import phishing, normales
-
-textos = phishing + normales
-etiquetas = [1] * len(phishing) + [0] * len(normales)
+from sklearn.metrics import classification_report
+from datos import cargar_todo
+...
+textos, etiquetas = cargar_todo()
 
 textos_estudio, textos_examen, etiquetas_estudio, etiquetas_examen = train_test_split(
     textos, etiquetas, test_size=0.25, random_state=42, stratify=etiquetas
@@ -29,3 +29,4 @@ for mensaje, correcta, ia in zip(textos_examen, etiquetas_examen, respuestas_ia)
     print(mensaje, "| correcta:", correcta, "| IA:", ia)
     if correcta != ia:
         print("   ❌ FALLÓ")
+print(classification_report(etiquetas_examen, respuestas_ia, target_names=["normal", "phishing"]))

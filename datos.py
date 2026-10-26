@@ -48,3 +48,25 @@ normales = [
     "buenas noches, que descanses",
     "hola, gracias por la ayuda de ayer",
 ]
+
+import pandas as pd
+
+
+def cargar_todo():
+    # 1. Tus ejemplos
+    textos = phishing + normales
+    etiquetas = [1] * len(phishing) + [0] * len(normales)
+
+    # 2. Correos en español
+    espanol = pd.read_csv("datos/spaphish.csv")
+    espanol = espanol.fillna("")
+    texto_es = espanol["subject"] + " " + espanol["body"]
+    textos = textos + texto_es.str.lower().tolist()
+    etiquetas = etiquetas + espanol["Label"].tolist()
+
+    # 3. SMS en inglés
+    ingles = pd.read_csv("datos/sms_ingles.txt", sep="\t", header=None, names=["etiqueta", "texto"])
+    textos = textos + ingles["texto"].str.lower().tolist()
+    etiquetas = etiquetas + ingles["etiqueta"].map({"spam": 1, "ham": 0}).tolist()
+
+    return textos, etiquetas

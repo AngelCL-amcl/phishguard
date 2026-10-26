@@ -75,5 +75,6 @@ Empecé este proyecto sin saber programar. Lo que más me gustó fue ver lo úti
 - Ejecuta: `python bot.py`
 - Los links peligrosos se muestran desactivados (`hxxp://ejemplo[.]com`) para que no se puedan abrir por accidente
 
-## Limitaciones
-- La IA se entrenó con solo 40 ejemplos, por eso todavía se equivoca con mensajes normales que usan palabras como "código" o "datos"
+## Datos
+- [SpaPhish](https://data.mendeley.com/datasets/hz2d6gz7pc): 1,395 correos en español (CC BY 4.0)
+- [SMS Spam Collection](https://archive.ics.uci.edu/dataset/228/): 5,572 SMS en inglés (UCI)
