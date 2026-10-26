@@ -19,8 +19,15 @@ async def inicio(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Cuando alguien manda cualquier mensaje de texto
 async def revisar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     texto = update.message.text
-    resultado = revisar_mensaje(texto)
-    await update.message.reply_text("RESULTADO: " + resultado)
+    resultado, razones = revisar_mensaje(texto)
+
+    respuesta = "RESULTADO: " + resultado
+    if razones:
+        respuesta = respuesta + "\n\nPor qué:"
+        for razon in razones:
+            respuesta = respuesta + "\n- " + razon
+
+    await update.message.reply_text(respuesta)
 
 
 # Encender el bot

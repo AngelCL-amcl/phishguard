@@ -96,15 +96,23 @@ def probabilidad_ia(mensaje):
 # ===== BLOQUE 4: FUNCIÓN PRINCIPAL =====
 def revisar_mensaje(mensaje):
     mensaje = mensaje.lower()
-
+    razones = []
+    
     links = encontrar_links(mensaje)
     mensaje_peligroso = False
     for link in links:
         if analizar_url(link):
             mensaje_peligroso = True
+            link_seguro = link.replace("http", "hxxp").replace(".", "[.]")
+            razones.append("Link falso:" + link_seguro)
 
     puntos = analizar_texto(mensaje)
     prob = probabilidad_ia(mensaje)
+    
+    if prob >= 40:
+        razones.append("La IA da " + str(prob) + "% de probabilidad de phishing")
+    if puntos >= 1:
+        razones.append("Palabras sospechosas encontradas: " + str(puntos))
 
     if mensaje_peligroso or prob >= 70:
         resultado = "PELIGROSO"
@@ -113,10 +121,13 @@ def revisar_mensaje(mensaje):
     else:
         resultado = "Parece seguro"
 
-    return resultado
+    return resultado, razones
 
 
 # ===== BLOQUE 5: USO DESDE LA TERMINAL =====
 if __name__ == "__main__":
     mensaje = input("Pega el mensaje a revisar: ")
-    print("RESULTADO:", revisar_mensaje(mensaje))
+    resultado, razones = revisar_mensaje(mensaje)
+    print("RESULTADO:", resultado)
+    for razon in razones:
+        print("-", razon)

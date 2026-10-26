@@ -68,8 +68,12 @@ Empecé este proyecto sin saber programar. Lo que más me gustó fue ver lo úti
 - Agregar más datos. 
 - Extensión
 - API 
-- Coneccion con telegram
+
+### Bot de Telegram
+- Creacion de bot con @BotFather y copia el token
+- Crea un archivo `.env` con: `TELEGRAM_TOKEN=tu_token`
+- Ejecuta: `python bot.py`
+- Los links peligrosos se muestran desactivados (`hxxp://ejemplo[.]com`) para que no se puedan abrir por accidente
 
 ## Limitaciones
 - La IA se entrenó con solo 40 ejemplos, por eso todavía se equivoca con mensajes normales que usan palabras como "código" o "datos"
-- Solo funciona en la terminal por ahora
