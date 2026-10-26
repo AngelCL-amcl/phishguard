@@ -33,7 +33,7 @@ dominios_confiables = [
 # ===== BLOQUE IA: ENTRENAR EL MODELO =====
 textos, etiquetas = cargar_todo()
 
-vectorizador = CountVectorizer()
+vectorizador = CountVectorizer(ngram_range=(1, 2))
 X = vectorizador.fit_transform(textos)
 
 modelo = MultinomialNB()
